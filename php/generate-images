@@ -38,6 +38,9 @@ RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install sockets
 RUN docker-php-ext-enable memcache
 
+# PHP Config
+RUN echo -e "memory_limit = 256M" | sudo tee /usr/local/etc/php/conf.d/memory.ini > /dev/null
+
 EOF
 )
 
