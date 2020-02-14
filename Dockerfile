@@ -4,7 +4,7 @@ FROM circleci/php:7.4.1-apache-buster
 USER root
 
 # Install common extensions
-RUN apt update && apt install -y libicu-dev zlib1g-dev libzip-dev libpng-dev
+RUN apt update && apt install -y libicu-dev zlib1g-dev libzip-dev libpng-dev default-mysql-client
 
 # make Apt non-interactive
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci \
@@ -32,7 +32,7 @@ RUN php -r "copy('https://raw.githubusercontent.com/composer/getcomposer.org/mas
 RUN docker-php-ext-configure intl && docker-php-ext-install intl
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install bcmath
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install sockets
 RUN docker-php-ext-install gd
 
