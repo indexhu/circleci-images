@@ -1,4 +1,0 @@
-file:
-  # ensure a basic shell exists
-  /bin/sh:
-    exists: true
